@@ -18,7 +18,7 @@ export default function Home() {
       duration: "60 min",
       price: "฿450",
       description: "Traditional Thai massage with pressure point techniques and yoga stretching to relieve muscle tension.",
-      image: "/images/service-thai-massage.jpg",
+      image: `${import.meta.env.BASE_URL}images/service-thai-massage.jpg`,
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ export default function Home() {
       duration: "120 min",
       price: "฿1,250",
       description: "Relaxing oil massage with essential aromas to calm the mind and rejuvenate the body.",
-      image: "/images/service-aromatherapy.jpg",
+      image: `${import.meta.env.BASE_URL}images/service-aromatherapy.jpg`,
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export default function Home() {
       duration: "60 min",
       price: "฿350",
       description: "Therapeutic foot massage with pressure points to release fatigue and improve circulation.",
-      image: "/images/service-thai-massage.jpg",
+      image: `${import.meta.env.BASE_URL}images/service-thai-massage.jpg`,
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ export default function Home() {
       duration: "60 min",
       price: "฿900",
       description: "Volcanic hot stones combined with massage to stimulate circulation and reduce muscle aches.",
-      image: "/images/service-aromatherapy.jpg",
+      image: `${import.meta.env.BASE_URL}images/service-aromatherapy.jpg`,
     },
   ];
 
@@ -85,7 +85,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-spa-zen.jpg"
+            src={`${import.meta.env.BASE_URL}images/hero-spa-zen.jpg`}
             alt="Spa hero"
             className="w-full h-full object-cover"
           />
@@ -186,7 +186,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="/images/spa-interior.jpg"
+                src={`${import.meta.env.BASE_URL}images/spa-interior.jpg`}
                 alt="Spa interior"
                 className="rounded-2xl shadow-lg"
               />
