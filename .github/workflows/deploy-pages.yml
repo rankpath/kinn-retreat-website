@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -37,6 +38,44 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Wait for legacy Pages publisher
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Branch-based Pages may still be enabled. Publish the built site last.
+            for (let attempt = 0; attempt < 60; attempt++) {
+              const { data } = await github.rest.actions.listWorkflowRunsForRepo({
+                ...context.repo, head_sha: context.sha, per_page: 100
+              });
+              const legacy = data.workflow_runs.filter(run =>
+                run.path === 'dynamic/pages/pages-build-deployment'
+              );
+              if (legacy.every(run => run.status === 'completed')) return;
+              core.info('Waiting for the branch-based Pages deployment to finish.');
+              await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+            throw new Error('Legacy Pages publisher did not finish within five minutes.');
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify live homepage
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import os, time, urllib.request
+          url = os.environ["SITE_URL"]
+          for attempt in range(24):
+              try:
+                  with urllib.request.urlopen(url + "?deploy=" + os.environ["GITHUB_SHA"], timeout=20) as response:
+                      html = response.read().decode()
+                  assert "/kinn-retreat-website/assets/" in html, "Built assets missing from live homepage"
+                  assert 'id="root"' in html, "React mount missing"
+                  print("Live homepage serves the built application.")
+                  break
+              except Exception as error:
+                  if attempt == 23:
+                      raise
+                  print("Waiting for Pages:", error)
+                  time.sleep(5)
+          PY
