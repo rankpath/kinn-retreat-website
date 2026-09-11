@@ -1,0 +1,326 @@
+<!--
+  Kinn Retreat & Massage — WordPress / Avada Code Block
+  Paste this entire file into one Avada Code Block element.
+  Page settings: 100% Width, No Page Title Bar, No Sidebar.
+  Replace the GitHub image URLs with WordPress Media Library URLs when ready.
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Lato:wght@400;700&family=Playfair+Display:wght@600;700&display=swap');
+
+  .kinn-wp {
+    --kinn-ink: #342f2a;
+    --kinn-muted: #746b63;
+    --kinn-cream: #fbf8f3;
+    --kinn-card: #ffffff;
+    --kinn-line: #e8e0d7;
+    --kinn-sage: #7f9278;
+    --kinn-clay: #a86f4c;
+    --kinn-clay-dark: #8b5638;
+    color: var(--kinn-ink);
+    background: var(--kinn-cream);
+    font: 400 16px/1.7 'Lato', sans-serif;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .kinn-wp, .kinn-wp * { box-sizing: border-box; }
+  .kinn-wp img { display: block; width: 100%; }
+  .kinn-wp a { color: inherit; text-decoration: none; }
+  .kinn-wp h1, .kinn-wp h2, .kinn-wp h3, .kinn-wp p { margin-top: 0; }
+  .kinn-wp h1, .kinn-wp h2, .kinn-wp h3 {
+    color: var(--kinn-ink);
+    font-family: 'Playfair Display', serif;
+    line-height: 1.14;
+  }
+
+  .kinn-container {
+    width: min(1180px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  .kinn-nav {
+    position: relative;
+    z-index: 20;
+    background: rgba(251, 248, 243, .96);
+    border-bottom: 1px solid var(--kinn-line);
+  }
+
+  .kinn-nav-inner {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .kinn-brand {
+    font: 700 23px/1 'Playfair Display', serif;
+    white-space: nowrap;
+  }
+
+  .kinn-brand span {
+    color: var(--kinn-clay);
+    font: 700 34px/1 'Caveat', cursive;
+    margin-right: 4px;
+  }
+
+  .kinn-menu { display: flex; align-items: center; gap: 30px; }
+  .kinn-menu a { font-weight: 700; font-size: 14px; }
+  .kinn-menu a:hover { color: var(--kinn-clay); }
+
+  .kinn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: var(--kinn-clay);
+    color: #fff !important;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  .kinn-btn:hover { background: var(--kinn-clay-dark); transform: translateY(-2px); }
+  .kinn-btn-outline { background: transparent; border-color: rgba(255,255,255,.72); }
+  .kinn-btn-outline:hover { background: #fff; color: var(--kinn-ink) !important; }
+
+  .kinn-hero {
+    min-height: 690px;
+    display: grid;
+    align-items: center;
+    position: relative;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(26,25,22,.72), rgba(26,25,22,.22)),
+      url('https://rankpath.github.io/kinn-retreat-website/images/hero-spa-zen.jpg') center/cover no-repeat;
+  }
+
+  .kinn-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
+    gap: 70px;
+    align-items: center;
+  }
+
+  .kinn-eyebrow {
+    color: var(--kinn-clay);
+    font: 700 34px/1.1 'Caveat', cursive;
+    margin-bottom: 18px;
+  }
+
+  .kinn-hero .kinn-eyebrow { color: #efb58f; }
+  .kinn-hero h1 { color: #fff; font-size: clamp(46px, 6vw, 76px); max-width: 720px; margin-bottom: 24px; }
+  .kinn-hero-copy > p { max-width: 590px; font-size: 19px; color: rgba(255,255,255,.9); }
+  .kinn-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 32px; }
+
+  .kinn-info-panel {
+    padding: 34px;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 16px;
+    background: rgba(255,255,255,.12);
+    backdrop-filter: blur(12px);
+  }
+
+  .kinn-info-row { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 15px 0; }
+  .kinn-info-row + .kinn-info-row { border-top: 1px solid rgba(255,255,255,.18); }
+  .kinn-icon { color: #efb58f; font-size: 22px; line-height: 1.2; }
+  .kinn-info-row strong { display: block; margin-bottom: 2px; }
+  .kinn-info-row span, .kinn-info-row a { color: rgba(255,255,255,.9); }
+
+  .kinn-section { padding: 100px 0; }
+  .kinn-section-alt { background: #f3eee7; }
+  .kinn-section-head { max-width: 720px; margin-bottom: 48px; }
+  .kinn-section h2 { font-size: clamp(36px, 4vw, 52px); margin-bottom: 18px; }
+  .kinn-lead { color: var(--kinn-muted); font-size: 18px; }
+
+  .kinn-services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .kinn-card {
+    padding: 22px;
+    border: 1px solid var(--kinn-line);
+    border-radius: 14px;
+    background: var(--kinn-card);
+    box-shadow: 0 12px 35px rgba(52,47,42,.06);
+  }
+
+  .kinn-card img { height: 245px; object-fit: cover; border-radius: 9px; margin-bottom: 22px; }
+  .kinn-card h3 { font-size: 28px; margin-bottom: 12px; }
+  .kinn-meta { display: flex; justify-content: space-between; gap: 20px; color: var(--kinn-muted); margin-bottom: 12px; }
+  .kinn-price { color: var(--kinn-clay); font-size: 20px; font-weight: 700; }
+  .kinn-card p { color: var(--kinn-muted); }
+  .kinn-card .kinn-btn { width: 100%; }
+
+  .kinn-about { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+  .kinn-about img { min-height: 560px; object-fit: cover; border-radius: 18px; box-shadow: 0 20px 45px rgba(52,47,42,.13); }
+  .kinn-checks { display: grid; gap: 12px; padding: 0; margin: 26px 0 0; list-style: none; }
+  .kinn-checks li { display: flex; gap: 12px; align-items: center; }
+  .kinn-checks li::before { content: '✓'; color: #fff; background: var(--kinn-sage); width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; font-size: 13px; flex: 0 0 23px; }
+
+  .kinn-reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .kinn-review { padding: 30px; }
+  .kinn-stars { color: #c67c46; letter-spacing: 3px; margin-bottom: 14px; }
+  .kinn-review blockquote { margin: 0 0 18px; color: var(--kinn-muted); font-style: italic; }
+
+  .kinn-contact { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; align-items: stretch; }
+  .kinn-contact-list { display: grid; gap: 22px; margin: 28px 0 32px; }
+  .kinn-contact-item { display: grid; grid-template-columns: 30px 1fr; gap: 13px; }
+  .kinn-contact-item .kinn-icon { color: var(--kinn-clay); }
+  .kinn-contact-item strong { display: block; margin-bottom: 3px; }
+  .kinn-contact-item span, .kinn-contact-item a { color: var(--kinn-muted); }
+  .kinn-map { min-height: 470px; border: 0; border-radius: 18px; box-shadow: 0 18px 45px rgba(52,47,42,.1); }
+
+  .kinn-footer { padding: 62px 0 26px; background: #2f332f; color: rgba(255,255,255,.76); }
+  .kinn-footer .kinn-brand, .kinn-footer strong { color: #fff; }
+  .kinn-footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+  .kinn-footer ul { margin: 10px 0 0; padding: 0; list-style: none; }
+  .kinn-footer a:hover { color: #efb58f; }
+  .kinn-copyright { border-top: 1px solid rgba(255,255,255,.14); margin-top: 38px; padding-top: 24px; text-align: center; font-size: 14px; }
+
+  @media (max-width: 900px) {
+    .kinn-menu { display: none; }
+    .kinn-hero { min-height: 760px; }
+    .kinn-hero-grid, .kinn-about, .kinn-contact { grid-template-columns: 1fr; gap: 42px; }
+    .kinn-info-panel { max-width: 560px; }
+    .kinn-reviews { grid-template-columns: 1fr; }
+    .kinn-about img { min-height: 420px; }
+    .kinn-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 640px) {
+    .kinn-container { width: min(100% - 28px, 1180px); }
+    .kinn-nav-inner { min-height: 68px; }
+    .kinn-nav .kinn-btn { padding: 10px 14px; min-height: 42px; }
+    .kinn-brand { font-size: 18px; }
+    .kinn-brand span { font-size: 28px; }
+    .kinn-hero { min-height: 720px; padding: 70px 0; }
+    .kinn-hero h1 { font-size: 44px; }
+    .kinn-info-panel { display: none; }
+    .kinn-section { padding: 74px 0; }
+    .kinn-services, .kinn-footer-grid { grid-template-columns: 1fr; }
+    .kinn-card img { height: 210px; }
+    .kinn-about img { min-height: 340px; }
+    .kinn-map { min-height: 360px; }
+  }
+</style>
+
+<main class="kinn-wp">
+  <nav class="kinn-nav" aria-label="Kinn Retreat navigation">
+    <div class="kinn-container kinn-nav-inner">
+      <a class="kinn-brand" href="#kinn-home"><span>Kinn</span> Retreat</a>
+      <div class="kinn-menu">
+        <a href="#kinn-services">Services</a>
+        <a href="#kinn-about">About</a>
+        <a href="#kinn-contact">Contact</a>
+      </div>
+      <a class="kinn-btn" href="tel:+66629946996">Book Now</a>
+    </div>
+  </nav>
+
+  <section class="kinn-hero" id="kinn-home">
+    <div class="kinn-container kinn-hero-grid">
+      <div class="kinn-hero-copy">
+        <div class="kinn-eyebrow">Find Your Peace</div>
+        <h1>Kinn Retreat &amp; Massage</h1>
+        <p>Experience authentic Thai massage and wellness treatments in the heart of Hua Hin. Reconnect with nature and yourself.</p>
+        <div class="kinn-actions">
+          <a class="kinn-btn" href="tel:+66629946996">Book Appointment</a>
+          <a class="kinn-btn kinn-btn-outline" href="#kinn-services">View Services</a>
+        </div>
+      </div>
+      <aside class="kinn-info-panel" aria-label="Business information">
+        <div class="kinn-info-row"><span class="kinn-icon">◷</span><div><strong>Hours</strong><span>Daily 12:00 PM – 11:00 PM</span></div></div>
+        <div class="kinn-info-row"><span class="kinn-icon">☎</span><div><strong>Reservation</strong><a href="tel:+66629946996">062-994-6996</a></div></div>
+        <div class="kinn-info-row"><span class="kinn-icon">⌖</span><div><strong>Location</strong><span>64 Phet Kasem Rd, Hua Hin</span></div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="kinn-section" id="kinn-services">
+    <div class="kinn-container">
+      <header class="kinn-section-head">
+        <div class="kinn-eyebrow">Our Services</div>
+        <h2>Massage &amp; Wellness Treatments</h2>
+        <p class="kinn-lead">From traditional Thai massage to aromatherapy, our professional therapists offer treatments designed to relax your body and calm your mind.</p>
+      </header>
+      <div class="kinn-services">
+        <article class="kinn-card">
+          <img src="https://rankpath.github.io/kinn-retreat-website/images/service-thai-massage.jpg" alt="Traditional Thai massage treatment" loading="lazy">
+          <h3>Thai Massage</h3><div class="kinn-meta"><span>60 min</span><span class="kinn-price">฿450</span></div>
+          <p>Traditional pressure-point techniques and yoga stretching to relieve muscle tension.</p>
+          <a class="kinn-btn" href="tel:+66629946996">Book This Service</a>
+        </article>
+        <article class="kinn-card">
+          <img src="https://rankpath.github.io/kinn-retreat-website/images/service-aromatherapy.jpg" alt="Aromatherapy massage treatment" loading="lazy">
+          <h3>Aromatherapy Massage</h3><div class="kinn-meta"><span>120 min</span><span class="kinn-price">฿1,250</span></div>
+          <p>Relaxing oil massage with essential aromas to calm the mind and rejuvenate the body.</p>
+          <a class="kinn-btn" href="tel:+66629946996">Book This Service</a>
+        </article>
+        <article class="kinn-card">
+          <img src="https://rankpath.github.io/kinn-retreat-website/images/service-thai-massage.jpg" alt="Foot massage treatment" loading="lazy">
+          <h3>Foot Massage</h3><div class="kinn-meta"><span>60 min</span><span class="kinn-price">฿350</span></div>
+          <p>Therapeutic foot massage with pressure points to release fatigue and improve circulation.</p>
+          <a class="kinn-btn" href="tel:+66629946996">Book This Service</a>
+        </article>
+        <article class="kinn-card">
+          <img src="https://rankpath.github.io/kinn-retreat-website/images/service-aromatherapy.jpg" alt="Hot stone massage treatment" loading="lazy">
+          <h3>Hot Stone Massage</h3><div class="kinn-meta"><span>60 min</span><span class="kinn-price">฿900</span></div>
+          <p>Volcanic hot stones combined with massage to stimulate circulation and reduce muscle aches.</p>
+          <a class="kinn-btn" href="tel:+66629946996">Book This Service</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="kinn-section kinn-section-alt" id="kinn-about">
+    <div class="kinn-container kinn-about">
+      <img src="https://rankpath.github.io/kinn-retreat-website/images/spa-interior.jpg" alt="Peaceful interior at Kinn Retreat and Massage" loading="lazy">
+      <div>
+        <div class="kinn-eyebrow">About Kinn Retreat</div>
+        <h2>Your Sanctuary of Wellness</h2>
+        <p class="kinn-lead">Located in front of Hua Hin Night Market on Phet Kasem Road, Kinn Retreat &amp; Massage is your destination for authentic Thai wellness experiences.</p>
+        <p>Our professionally trained therapists combine traditional Thai massage techniques with modern wellness practices. We use carefully selected natural products and maintain high standards of cleanliness and hospitality.</p>
+        <ul class="kinn-checks"><li>Expert, trained therapists</li><li>Clean, peaceful environment</li><li>Premium natural products</li><li>Affordable pricing</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="kinn-section" aria-labelledby="kinn-reviews-title">
+    <div class="kinn-container">
+      <header class="kinn-section-head"><div class="kinn-eyebrow">Guest Reviews</div><h2 id="kinn-reviews-title">What Our Guests Say</h2></header>
+      <div class="kinn-reviews">
+        <article class="kinn-card kinn-review"><div class="kinn-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“The shop was very clean and quiet. Foot massage was excellent!”</blockquote><strong>— Kyunghee</strong></article>
+        <article class="kinn-card kinn-review"><div class="kinn-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Very relaxing, quiet and good service. Highly recommend!”</blockquote><strong>— Edoardo</strong></article>
+        <article class="kinn-card kinn-review"><div class="kinn-stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“Professional therapists and peaceful atmosphere. Best spa experience in Hua Hin!”</blockquote><strong>— Sarah</strong></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="kinn-section kinn-section-alt" id="kinn-contact">
+    <div class="kinn-container kinn-contact">
+      <div>
+        <div class="kinn-eyebrow">Get In Touch</div><h2>Visit Us Today</h2>
+        <div class="kinn-contact-list">
+          <div class="kinn-contact-item"><span class="kinn-icon">⌖</span><div><strong>Location</strong><span>64 Phet Kasem Rd, Hua Hin District, Prachuap Khiri Khan 77110<br>In front of Hua Hin Night Market, opposite Swensen’s</span></div></div>
+          <div class="kinn-contact-item"><span class="kinn-icon">☎</span><div><strong>Phone</strong><a href="tel:+66629946996">062-994-6996</a></div></div>
+          <div class="kinn-contact-item"><span class="kinn-icon">◷</span><div><strong>Hours</strong><span>Daily 12:00 PM – 11:00 PM</span></div></div>
+        </div>
+        <a class="kinn-btn" href="tel:+66629946996">Book Appointment</a>
+      </div>
+      <iframe class="kinn-map" title="Kinn Retreat and Massage map" src="https://www.google.com/maps?q=Kinn+Retreat+and+Massage+Hua+Hin&amp;output=embed" width="100%" height="470" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <footer class="kinn-footer">
+    <div class="kinn-container">
+      <div class="kinn-footer-grid">
+        <div><div class="kinn-brand"><span>Kinn</span> Retreat</div><p>Your sanctuary of wellness in Hua Hin</p></div>
+        <div><strong>Quick Links</strong><ul><li><a href="#kinn-services">Services</a></li><li><a href="#kinn-about">About</a></li><li><a href="#kinn-contact">Contact</a></li></ul></div>
+        <div><strong>Hours</strong><p>Daily<br>12:00 PM – 11:00 PM</p></div>
+        <div><strong>Contact</strong><p><a href="tel:+66629946996">062-994-6996</a><br>64 Phet Kasem Rd</p></div>
+      </div>
+      <div class="kinn-copyright">© 2026 Kinn Retreat &amp; Massage build by Adscraft Digital. All rights reserved.</div>
+    </div>
+  </footer>
+</main>
